@@ -55,7 +55,7 @@ public class FtpActivity extends Activity {
         }catch (Exception ex){
             ex.printStackTrace();
             server = null;
-            AndroidUtils.Msgbox(this,"FTP服务器配置失败，将无法使用FTP传书","注意","关闭");
+            AndroidUtils.Msgbox(this,"The ftp server could not be setup","Attention","Close");
             chkServer.setEnabled(false);
         }
         chkServer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -71,7 +71,7 @@ public class FtpActivity extends Activity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            ((TextView)findViewById(R.id.txtFtpAddress)).setText("FTP地址：ftp://"+getIPAddress(true)+":4321/");
+                                            ((TextView)findViewById(R.id.txtFtpAddress)).setText("FTP address：ftp://"+getIPAddress(true)+":4321/");
                                         }
                                     });
                                 } catch (FtpException e) {
@@ -79,17 +79,17 @@ public class FtpActivity extends Activity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            AndroidUtils.Msgbox(FtpActivity.this,"FTP服务器开启失败，将无法使用FTP传书","注意","关闭");
+                                            AndroidUtils.Msgbox(FtpActivity.this,"The FTP server failed to open","Attention","Close");
                                             chkServer.setChecked(false);
                                         }
                                     });
                                 }
                             }
                         }.start();
-                        ((TextView)findViewById(R.id.txtFtpAddress)).setText("正在启动...");
+                        ((TextView)findViewById(R.id.txtFtpAddress)).setText("Launching...");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        AndroidUtils.Msgbox(FtpActivity.this,"FTP服务器开启失败，将无法使用FTP传书","注意","关闭");
+                        AndroidUtils.Msgbox(FtpActivity.this,"The FTP server failed to open","Attention","Close");
                         buttonView.setChecked(false);
                     }
                 }
@@ -102,7 +102,7 @@ public class FtpActivity extends Activity {
                             e.printStackTrace();
                             server = null;
                         }
-                        ((TextView)findViewById(R.id.txtFtpAddress)).setText("FTP已关闭");
+                        ((TextView)findViewById(R.id.txtFtpAddress)).setText("FTP has been closed");
                     }
                 }
             }
@@ -116,12 +116,11 @@ public class FtpActivity extends Activity {
 
     public void showFtpIp(View view) {
         String message=
-                "若您使用的是Windows操作系统，请打开“此电脑”，在地址栏里输入下列FTP地址，按下回车键。有关详情请百度搜索“Windows访问FTP”\r\n" +
-                "使用Android手机，可以通过 ES文件管理器 访问FTP服务器。\r\n" +
-                "您同样可以使用FileZilla、FlashFXP等FTP客户端进行访问，登陆时请使用匿名登陆。\r\n" +
-                "其它操作系统访问FTP的方式，请参考操作系统手册。\r\n\r\n" +
-                "FTP地址：ftp://"+getIPAddress(true)+":4321/";
-        AndroidUtils.Msgbox(this,message,"使用方法","了解");
+                "On windows download filezilla from filezilla-project.org\r\n" +
+                "On linux install filezilla with your package manger of choice\r\n" +
+                "Use anonymous login\r\n\r\n" +
+                "FTP address：ftp://"+getIPAddress(true)+":4321/";
+        AndroidUtils.Msgbox(this,message,"Usage","Understanding");
     }
 
     private void setupStart() throws FileNotFoundException, FtpException {
@@ -171,7 +170,7 @@ public class FtpActivity extends Activity {
         super.onDestroy();
         if(null!=server && !server.isStopped()){
             server.stop();
-            AndroidUtils.Toast(this,"FTP服务器已关闭");
+            AndroidUtils.Toast(this,"FTP Has been closed");
         }
     }
 }

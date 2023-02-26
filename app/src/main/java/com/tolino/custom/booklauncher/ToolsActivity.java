@@ -45,7 +45,7 @@ public class ToolsActivity extends Activity {
             collapse.invoke(statusBarManager);
         } catch (Exception localException) {
             localException.printStackTrace();
-            AndroidUtils.Toast(context,"您的安卓版本不支持此功能");
+            AndroidUtils.Toast(context,"Your Android version does not support this feature");
         }
     }
 
@@ -81,7 +81,7 @@ public class ToolsActivity extends Activity {
     public void killAll(){
 
         if(Build.VERSION.SDK_INT >= 21){
-            AndroidUtils.Toast(this,"您的安卓版本不支持此功能");
+            AndroidUtils.Toast(this,"Your Android version does not support this feature");
             return;
         }
 
@@ -93,7 +93,7 @@ public class ToolsActivity extends Activity {
         int count=0;//被杀进程计数
         String nameList="";//记录被杀死进程的包名
         long beforeMem = getAvailMemory(this);//清理前的可用内存
-        Log.i(TAG, "清理前可用内存为 : " + beforeMem);
+        Log.i(TAG, "The available memory before cleaning is : " + beforeMem);
 
         for (ActivityManager.RunningAppProcessInfo appProcessInfo:appProcessInfos) {
             nameList="";
@@ -111,11 +111,11 @@ public class ToolsActivity extends Activity {
         }
 
         long afterMem = getAvailMemory(this);//清理后的内存占用
-        AndroidUtils.Msgbox(this,"杀死 " + (count+1) + " 个进程, "
-                + formatFileSize(afterMem - beforeMem),"内存清理","关闭");
+        AndroidUtils.Msgbox(this,"kill " + (count+1) + " Processes, "
+                + formatFileSize(afterMem - beforeMem),"Memory Cleanup","Close");
 
-        Log.i(TAG, "清理后可用内存为 : " + afterMem);
-        Log.i(TAG, "清理进程数量为 : " + count+1);
+        Log.i(TAG, "The available memory after the cleanup is : " + afterMem);
+        Log.i(TAG, "The number of cleanup processes is : " + count+1);
     }
 
 
@@ -135,16 +135,16 @@ public class ToolsActivity extends Activity {
      */
     private String formatFileSize(long number){
         if(number>0) {
-            return "释放"+Formatter.formatFileSize(this, number)+"内存";
+            return "Release"+Formatter.formatFileSize(this, number)+"RAM";
         }else if(number<0) {
-            return "失去"+Formatter.formatFileSize(this, -number)+"内存";
+            return "Lose"+Formatter.formatFileSize(this, -number)+"RAM";
         }else{
-            return "什么都没有发生";
+            return "Nothing happened";
         }
     }
 
     public void onAboutClick(View view) {
-        AndroidUtils.Msgbox(this,"暂无","关于","关闭");
+        AndroidUtils.Msgbox(this,"No","About","Close");
     }
 
     public void onBackClick(View view) {

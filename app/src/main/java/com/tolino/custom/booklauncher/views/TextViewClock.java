@@ -59,7 +59,7 @@ public class TextViewClock extends TextView {
                     lunar = LunarCalendar.solar2Lunar(solar);
                     setText(lunar.getGeneralName().trim());
                 }catch (Exception ex){
-                    setText("农历超出范围");
+                    setText("Lunar calendar out of range");
                 }
                 hWnd.postDelayed(this,60000);
             }else{
