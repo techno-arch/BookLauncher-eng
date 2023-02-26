@@ -134,7 +134,7 @@ public class XmlUtils {
      * @param node
      */
     private void listNodes(final Element node) {
-        System.out.println("当前节点的名称：：" + node.getName());
+        System.out.println("Name of current node：：" + node.getName());
         // 获取当前节点的所有属性节点
         List<Attribute> list = node.attributes();
         // 遍历属性节点
@@ -143,7 +143,7 @@ public class XmlUtils {
         }
 
         if (!(node.getTextTrim().equals(""))) {
-            System.out.println("文本内容：：：：" + node.getText());
+            System.out.println("Text content：：：：" + node.getText());
         }
 
         // 当前节点下面子节点迭代器

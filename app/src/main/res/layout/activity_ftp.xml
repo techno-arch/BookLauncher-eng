@@ -22,14 +22,14 @@
             android:textSize="20sp"
             android:background="@drawable/button"
             android:layout_margin="10dp"
-            android:text="返回"
+            android:text="Back"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="FTP传书"
+            android:text="FTP Transmission"
             android:textSize="40sp"
             android:textColor="#000"
             />
@@ -43,7 +43,7 @@
             android:onClick="showFtpIp"
             android:background="@drawable/button"
             android:layout_margin="10dp"
-            android:text="使用方式"
+            android:text="Usage"
             />
 
     </LinearLayout>
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="FTP状态"
+            android:text="FTP Status"
             android:textSize="40sp"
             android:textColor="#000"
             />
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/txtFtpAddress"
-            android:text="FTP已关闭"
+            android:text="FTP is closed"
             android:textSize="20sp"
             android:layout_margin="10dp"
             android:textColor="#000"
@@ -102,7 +102,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="连接到WIFI后，打开开关，然后点击“使用方式”按钮"
+            android:text="After connecting to WIFI, turn on the switch and then click the Usage button"
             android:textSize="20sp"
             android:layout_margin="10dp"
             android:textColor="#000"

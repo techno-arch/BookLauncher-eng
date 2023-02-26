@@ -20,7 +20,7 @@
         android:textSize="16sp"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
-        android:text="解忧杂货铺 - 东野圭吾"
+        android:text="Relief Grocery Store - Keigo Higashino"
         android:gravity="center"
         android:lines="1" />
 </LinearLayout>

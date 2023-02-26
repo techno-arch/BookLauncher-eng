@@ -17,10 +17,10 @@
             android:onClick="onBooksGoBack"
             android:padding="10dp"
             android:layout_margin="10sp"
-            android:text="  后退  "/>
+            android:text="  Back  "/>
 
         <TextView
-            android:text="图书馆"
+            android:text="Library"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"
@@ -36,7 +36,7 @@
             android:onClick="onReloadBooks"
             android:padding="10dp"
             android:layout_margin="10sp"
-            android:text="  扫描  "/>
+            android:text="  Scanning  "/>
 
     </LinearLayout>
 
@@ -78,7 +78,7 @@
             android:id="@+id/txtBookPageInfo"
             android:textSize="20sp"
             android:gravity="center"
-            android:text="第 0/0 页"/>
+            android:text="Page 0/0 Page"/>
 
         <Button
             android:layout_width="60dp"

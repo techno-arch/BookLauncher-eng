@@ -68,7 +68,7 @@ public class ReadEpubHeadInfo {
             if (ZipUtils.zipSpecifiedFile(ePubPath, SAVE_INFO_PATH, META_INF_CONTAINER)) {
                 contentOpfPath = XmlUtils.xmlSubtagNameAnalysis(SAVE_INFO_PATH + META_INF_CONTAINER, "rootfiles", "rootfile", "full-path");
             } else {
-                LogUtils.e("epub解析", ePubPath + "解析错误，请检查书本");
+                LogUtils.e("epub analysis", ePubPath + "Wrong parsing, please check the book");
                 return null;
             }
             //2.解压获取到的content.opf路径，并用xml解析获取书名、作者等信息
@@ -96,7 +96,7 @@ public class ReadEpubHeadInfo {
                     }
                 }
             } else {
-                LogUtils.e("epub解析", ePubPath + "解析错误，请检查书本（可能原因，书籍被加密）");
+                LogUtils.e("epub analysis", ePubPath + "Parsing error, please check the book (ebook might be encrypted)");
                 return null;
             }
 

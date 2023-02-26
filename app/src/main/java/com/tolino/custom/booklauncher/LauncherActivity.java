@@ -80,8 +80,8 @@ public class LauncherActivity extends Activity {
 
 
     void showWaringMessage(){
-        new AlertDialog.Builder(LauncherActivity.this).setTitle("电纸书已连接到电脑").setMessage("当前处于文件传输模式下，不能进行其它操作。建议在电脑上安全弹出。")
-                .setPositiveButton("好", null).create().show();
+        new AlertDialog.Builder(LauncherActivity.this).setTitle("The e-reader is in MTP mode").setMessage("Currently in file transfer mode, no other operations can be performed. It is recommended to eject safely on your computer.")
+                .setPositiveButton("Okay", null).create().show();
     }
 
     @Override
@@ -316,7 +316,7 @@ public class LauncherActivity extends Activity {
         BookAdapter adapter = new BookAdapter(lsResult, currentBookPage *BOOK_PER_PAGE,BOOK_PER_PAGE);
         gridView.setAdapter(adapter);
         gridView.setNumColumns(BOOK_COL);
-        ((TextView)findViewById(R.id.txtBookPageInfo)).setText("第 "+(currentBookPage +1)+"/"+ totalBookPage +" 页");
+        ((TextView)findViewById(R.id.txtBookPageInfo)).setText("Page "+(currentBookPage +1)+"/"+ totalBookPage +" Page");
     }
 
     private static int BOOK_PER_PAGE = 6;
@@ -430,7 +430,7 @@ public class LauncherActivity extends Activity {
         if(!canOperate()){
             showWaringMessage();return;
         }
-        new AlertDialog.Builder(LauncherActivity.this).setTitle("扫描方式").setItems(new String[]{"扫描/sdcard/Books","扫描自定义路径"}, new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(LauncherActivity.this).setTitle("Scan Method").setItems(new String[]{"Scanning /sdcard/Books","Scan custom paths"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(which==0){
@@ -444,13 +444,13 @@ public class LauncherActivity extends Activity {
     }
 
     public void scanDefaultPath(){
-        new AlertDialog.Builder(LauncherActivity.this).setTitle("扫描书籍").setMessage("是否开始扫描书籍?扫描时间取决于书籍的数量。")
-                .setPositiveButton("是的", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(LauncherActivity.this).setTitle("Scanning books").setMessage("Does the scanning of books begin? The scanning time depends on the number of books.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         scanBooks(bookRoot);
                     }
-                }).setNegativeButton("不是",null).create().show();
+                }).setNegativeButton("No",null).create().show();
     }
 
     public void scanCustomPath(){
@@ -460,14 +460,14 @@ public class LauncherActivity extends Activity {
     public void inputPath(){
         final EditText edt = new EditText(this);
         edt.setText(bookRoot);
-        edt.setHint("输入路径");
-        new AlertDialog.Builder(LauncherActivity.this).setTitle("输入要扫描的路径").setView(edt)
-                .setPositiveButton("开始", new DialogInterface.OnClickListener() {
+        edt.setHint("Input path");
+        new AlertDialog.Builder(LauncherActivity.this).setTitle("Enter the path to scan").setView(edt)
+                .setPositiveButton("Start", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         scanBooks(edt.getText().toString());
                     }
-                }).setNegativeButton("取消",null).create().show();
+                }).setNegativeButton("Cancellation",null).create().show();
     }
 
 
@@ -508,8 +508,8 @@ public class LauncherActivity extends Activity {
         Intent intent = new Intent();
         File file = new File(entry.getPath());
         if(!file.exists()){
-            new AlertDialog.Builder(LauncherActivity.this).setTitle("打开失败").setMessage("书籍不存在，建议重新扫描。")
-                    .setPositiveButton("好", null).create().show();
+            new AlertDialog.Builder(LauncherActivity.this).setTitle("Failed to open").setMessage("Book does not exist, please rescan")
+                    .setPositiveButton("Okay", null).create().show();
             return;
         }
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//设置标记
@@ -630,12 +630,12 @@ public class LauncherActivity extends Activity {
             @Override
             protected String doInBackground(String... params) {
                 try {
-                    publishProgress("正在扫描目录...");
+                    publishProgress("Scanning catalog...");
                     delay(300);
                     rescurePath(params[0]);
-                    publishProgress("扫描到了" + bookPath.size() + "本书，" + path.size() + "个目录");
+                    publishProgress("Scanned" + bookPath.size() + "Book. " + path.size() + "Catalogs");
                     delay(500);
-                    publishProgress("正在读取数据库...");
+                    publishProgress("Reading database...");
 
                     List<DBUtils.BookEntry> pathInDb = DBUtils.queryBooks("type=?", String.valueOf(DBUtils.BookEntry.TYPE_FOLDER));
                     for (DBUtils.BookEntry pid : pathInDb) {
@@ -673,15 +673,15 @@ public class LauncherActivity extends Activity {
                             newBookPathList.add(newBookPath);
                         }
                     }
-                    publishProgress("找到" + newBookPathList.size() + "本新书。");
+                    publishProgress("Found" + newBookPathList.size() + "The new book.");
                     delay(500);
-                    publishProgress("开始添加...");
+                    publishProgress("Begin adding...");
                     delay(200);
 
                     int success = 0, deleted = 0;
 
                     for (int i = 0; i < newBookPathList.size(); i++) {
-                        publishProgress("正在添加第" + (i + 1) + "/" + newBookPathList.size() + "本书");
+                        publishProgress("Being added to the first" + (i + 1) + "/" + newBookPathList.size() + "The book");
                         try {
                             File bf = new File(newBookPathList.get(i));
                             String parentPath = bf.getParentFile().getAbsolutePath();
@@ -700,21 +700,21 @@ public class LauncherActivity extends Activity {
                             ex.printStackTrace();
                         }
                     }
-                    publishProgress("添加完成, 正在保存到数据库...");
+                    publishProgress("Adding is complete, saving to database...");
                     delay(300);
                     DBUtils.InsertBooks(folderEntries);
                     DBUtils.InsertBooks(bookEntries);
-                    publishProgress("正在查找已删除或移动的书籍...");
+                    publishProgress("Searching for deleted or moved books...");
                     delay(300);
                     deleted = cleanDB();
                     int removeEmptyPath = cleanEmptyDir();
                     while (removeEmptyPath>0){
                         removeEmptyPath = cleanEmptyDir();
                     }
-                    return "添加了" + success + "本书，移除了" + deleted + "本书";
+                    return "Added" + success + "The book, removed" + deleted + "The book";
                 }catch (Exception ex){
                     ex.printStackTrace();
-                    return "扫描失败："+ ex.toString();
+                    return "Scanning failure: "+ ex.toString();
 
                 }
             }
@@ -768,7 +768,7 @@ public class LauncherActivity extends Activity {
             @Override
             protected void onPreExecute() {
                 pdd = new ProgressDialog(LauncherActivity.this,ProgressDialog.STYLE_SPINNER);
-                pdd.setTitle("扫描书籍");
+                pdd.setTitle("Scanning books");
                 pdd.setCancelable(false);
                 pdd.show();
             }
@@ -778,8 +778,8 @@ public class LauncherActivity extends Activity {
                 pdd.dismiss();
                 cd(DBUtils.BookEntry.ROOT_UUID);
                 loadRecentBook();
-                new AlertDialog.Builder(LauncherActivity.this).setTitle("扫描完成").setMessage(s)
-                        .setPositiveButton("好", null).create().show();
+                new AlertDialog.Builder(LauncherActivity.this).setTitle("Scan completed").setMessage(s)
+                        .setPositiveButton("Okay", null).create().show();
             }
         }.execute(scanPath);
     }
@@ -815,18 +815,18 @@ public class LauncherActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            new AlertDialog.Builder(LauncherActivity.this).setTitle("打开外部应用").setMessage("是否打开 "+title+"?")
-                    .setPositiveButton("是的", new DialogInterface.OnClickListener() {
+            new AlertDialog.Builder(LauncherActivity.this).setTitle("Open external application").setMessage("Open "+title+"?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             try{
                                 startActivity(launchIntent);
                             }catch (Exception ex){
                                 ex.printStackTrace();
-                                AndroidUtils.Toast(LauncherActivity.this, "无法启动这个应用");
+                                AndroidUtils.Toast(LauncherActivity.this, "Can't start this application");
                             }
                         }
-                    }).setNegativeButton("不是",null).create().show();
+                    }).setNegativeButton("No",null).create().show();
         }
     }
 
@@ -842,7 +842,7 @@ public class LauncherActivity extends Activity {
         @Override
         public boolean onLongClick(View v) {
 
-            new AlertDialog.Builder(LauncherActivity.this).setTitle(appName).setItems(new String[]{"应用信息"}, new DialogInterface.OnClickListener() {
+            new AlertDialog.Builder(LauncherActivity.this).setTitle(appName).setItems(new String[]{"Application Info"}, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if(which==0){
@@ -865,7 +865,7 @@ public class LauncherActivity extends Activity {
     }
 
     void loadPage(){
-        ((TextView)findViewById(R.id.txtAppPageInfo)).setText("第 "+(currentAppPage +1)+"/"+ totalAppPage +" 页");
+        ((TextView)findViewById(R.id.txtAppPageInfo)).setText("Page "+(currentAppPage +1)+"/"+ totalAppPage +" Page");
         GridView gridView = (GridView) findViewById(R.id.gridView1);
         BaseAdapter adapter = new AppAdapter(currentAppPage * APP_PER_PAGE,APP_PER_PAGE);
         gridView.setAdapter(adapter);

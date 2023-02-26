@@ -23,14 +23,14 @@
             android:textSize="20sp"
             android:background="@drawable/button"
             android:layout_margin="10dp"
-            android:text="返回"
+            android:text="Back"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="工具箱"
+            android:text="Toolbox"
             android:textSize="40sp"
             android:textColor="#000"
             />
@@ -43,7 +43,7 @@
             android:background="@drawable/button"
             android:layout_margin="10dp"
             android:onClick="onAboutClick"
-            android:text="关于"
+            android:text="About"
             />
 
     </LinearLayout>
@@ -69,7 +69,7 @@
                 android:background="@drawable/button"
                 android:onClick="onNotificationClick"
                 android:layout_margin="10dp"
-                android:text="拉下通知栏（低版本系统可用）"
+                android:text="Pull down the notification bar"
                 />
 
             <Button
@@ -80,7 +80,7 @@
                 android:background="@drawable/button"
                 android:onClick="onTorchClick"
                 android:layout_margin="10dp"
-                android:text="手电筒（背光调最亮）"
+                android:text="light"
                 />
 
             <Button
@@ -91,7 +91,7 @@
                 android:onClick="cleanMemory"
                 android:background="@drawable/button"
                 android:layout_margin="10dp"
-                android:text="内存清理（高版本不可用）"
+                android:text="Memory cleanup"
                 />
 
             <Button
@@ -102,7 +102,7 @@
                 android:onClick="openFtp"
                 android:background="@drawable/button"
                 android:layout_margin="10dp"
-                android:text="FTP传书"
+                android:text="FTP Transmission"
                 />
 
         </LinearLayout>

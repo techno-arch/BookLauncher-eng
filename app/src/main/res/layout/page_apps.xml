@@ -9,7 +9,7 @@
         android:gravity="center"
         android:orientation="horizontal">
     <TextView
-        android:text="应用列表："
+        android:text="List of applications :"
         android:layout_width="wrap_content"
         android:layout_weight="1"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:onClick="onReloadApp"
             android:padding="10dp"
             android:layout_margin="10sp"
-            android:text="  刷新  "/>
+            android:text="  Refresh  "/>
 
     </LinearLayout>
 
@@ -63,7 +63,7 @@
             android:id="@+id/txtAppPageInfo"
             android:textSize="20sp"
             android:gravity="center"
-            android:text="第 0/0 页"/>
+            android:text="Page 0/0 Page"/>
 
         <Button
             android:layout_width="60dp"
